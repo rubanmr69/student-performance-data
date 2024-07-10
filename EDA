@@ -1,0 +1,44 @@
+library(readr)
+library(dplyr)
+library(ggplot2)
+str(Student_performance_data._)
+head(Student_performance_data._)
+summary(Student_performance_data._)
+
+head(Student_performance_data._)
+
+# Check for missing values
+colSums(is.na(Student_performance_data._))
+
+# Visualize the distribution of each numeric variable
+numeric_vars <- sapply(Student_performance_data._, is.numeric)
+Student_performance_data._<- Student_performance_data._[, numeric_vars]
+
+# Check for missing values
+missing_values <- sapply(Student_performance_data._, function(x) sum(is.na(x)))
+missing_values
+
+# Ensure Season is a categorical variable (replace 'Season' with the actual column name)
+Student_performance_data._$StudentID<- as.factor(Student_performance_data._$StudentID)
+
+# Handle missing values (e.g., by removing rows with missing values)
+cleaned_data <- na.omit(Student_performance_data._)
+
+# Histogram for a numeric variable (replace 'temp' with an appropriate column name)
+ggplot(Student_performance_data._, aes(x =Age)) +
+  geom_histogram(binwidth = 1, fill = "blue", color = "black") +
+  theme_minimal() +
+  labs(title = "Histogram of Temperature", x = "student id", y = "no of member")
+
+# Scatter plot to show the relationship between two numeric variables (replace 'temp' and 'humidity' with appropriate column names)
+ggplot(Student_performance_data._, aes(x = StudentID, y = ParentalSupport)) +
+  geom_point(color = "red") +
+  theme_minimal() +
+  labs(title = "Scatter Plot of Temperature vs Humidity", x = "student id", y = "support")
+
+# Time series plot for a variable over time (replace 'date' and 'temp' with appropriate column names)
+ggplot(Student_performance_data._, aes(x = Gender, y = Absences)) +
+  geom_line(color = "purple") +
+  theme_minimal() +
+  labs(title = "Time Series of Temperature", x = "gender", y = "absences")
+
